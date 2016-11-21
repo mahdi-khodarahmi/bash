@@ -1,0 +1,103 @@
+##!/bin/bash
+Green='\033[1;32m'
+CY='\033[1;36m'
+NC='\033[0m'
+RED='\033[1;31m'
+
+echo "------------------------------------------------"
+echo -ne "${Green}Dear user: ${NC}\n"
+echo -ne "${CY}For see date in the PAST, please Choose Number --> 1  ${NC}\n"
+echo -ne "${CY}For see date in the FUTURE, please Choose Number --> 2  ${NC}\n"
+
+
+read -p "Please Choose Number: " choose
+read -p "Please Enter Year(s): " sal
+read -p "Please Enter Day(s): " roz
+
+if [ -z "$choose" ] || [ -z "$sal" ] || [ -z "$roz" ]
+then
+echo -ne "${RED}You Must Enter All Numbers.The Numbers Must Be Correct.The Porgram Closed.Try Again! ${NC} \n"
+elif [ "$choose" -ge 3 ]
+then
+echo -ne "${RED}You Must Choose 1 OR 2 For "Choose Number".The Program Close.Tye Again! ${NC} \n"
+elif [ "$choose" -le 0 ]
+then
+echo -ne "${RED}You Must Choose Number Greater Than Zero.The Porgram Closed.Try Again!${NC} \n"
+elif [ "$sal" -lt 0 ] && [ "$roz" -lt 0 ]
+then
+echo -ne "${RED}You Must Enter At Least A Value Greater Than Zero( Year(s) OR Day(s) ).The Porgram Closed.Try Again!${NC} \n"
+exit 
+elif [ $choose = 1  ]
+then
+echo -ne "${CY}You Chose 1 And I Will Show Your Date On Past. ${NC}\n"
+saldate=$(date --date="$sal years ago" +"%s")
+salnow=$(date +"%s")
+final=$(( (salnow - saldate) / (24*60*60)))
+
+echo "------------------------------------------------"
+echo
+echo -ne "${CY}I'm Thinking And Calculation Your Date ... ${NC}\n"
+echo
+fr=$(($final + $roz))
+echo -ne "${Green}$final+$roz=$fr Days Of The $sal year(s) And $roz Day(s) Ago, Has Passed. ${NC}\n"
+echo
+echo -ne "${CY}That's Cool !${NC}\n"
+echo "------------------------------------------------"
+echo -ne "${Green}Date On $fr Day(s) Ago:${NC}\n"
+dr=$(($final+$roz))
+dv=$(date --date="$dr days ago")
+echo
+echo -ne "${Green}$dv ${NC}\n"
+echo "------------------------------------------------"
+echo
+echo -ne "${CY}This Script Has Written By: Mahdi Khodarahmi${NC}\n"
+echo -ne "${CY}I Really Appreciate Of Professor Jalal Hajigholamali . ${NC}\n"
+echo -ne "${CY}Thank You For Use The Program. ${NC}\n"
+echo -ne "${CY}Keep In Touch.${NC}\n"
+echo -ne "${CY}Khodarahmi@usa.com${NC}\n"
+echo
+echo "------------------------------------------------"
+
+
+
+
+elif [ $choose = 2  ]
+then
+echo -ne "${CY}You Chose 2 And I Will Show Future Date. ${NC}\n"
+
+sal2=$((-1*$sal))
+roz2=$((-1*$roz))
+
+saldate=$(date --date="$sal2 years ago" +"%s")
+salnow=$(date +"%s")
+final=$(( (salnow - saldate) / (24*60*60)))
+
+echo "------------------------------------------------"
+echo
+echo -ne "${CY}I'm Thinking And Calculation Your Date ... ${NC}\n"
+echo
+fr=$(( (-1) * ($final + $roz)))
+fr2=$(($final + $roz2))
+echo -ne "${Green} $fr Day(s) We Go Forward. ${NC}\n"
+echo
+echo -ne "${CY}That's Cool !${NC}\n"
+echo "------------------------------------------------"
+echo -ne "${Green}Date On $fr Day(s) Later:${NC}\n"
+dr=$(($final+$roz2))
+dv=$(date --date="$dr days ago")
+echo
+echo -ne "${Green}$dv ${NC}\n"
+
+echo "------------------------------------------------"
+echo
+echo -ne "${CY}This Script Has Written By: Mahdi Khodarahmi${NC}\n"
+echo -ne "${CY}I Really Appreciate Of Professor Jalal Hajigholamali . ${NC}\n"
+echo -ne "${CY}Thank You For Use The Program. ${NC}\n"
+echo -ne "${CY}Keep In Touch.${NC}\n"
+echo -ne "${CY}Khodarahmi@usa.com${NC}\n"
+echo
+echo "------------------------------------------------"
+
+
+
+fi
